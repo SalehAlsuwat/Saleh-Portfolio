@@ -1,0 +1,98 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block title %}Saleh Portfolio{% endblock %}
+{% block current_page %}Home{% endblock %}
+
+{% block content %}
+
+    <!-- Section hero -->
+    <section class="Hero-section">
+        <div class="relative flex items-center justify-center py-32">
+                
+                <!-- Text Behind -->
+                <div class="dark:text-white">
+                    <h1 class="text-center text-[80px] lg:text-[180px] font-bold leading-[0.8] relative z-0 ">
+                        FullStack
+                    </h1>
+                    <h1 class="text-center text-[80px] lg:text-[180px] font-bold leading-[0.8] relative z-20 " >
+                        Developer
+                    </h1>
+                </div>
+                
+
+                <!-- Image Front -->
+                <img src="{% static 'images/Myface.png' %}" alt="My Face" class=" absolute z-10 w-[100px] lg:w-56 rounded-full saturate-50" >
+
+
+                <div class="absolute top-28 left-2 lg:top-40 lg:left-40 -rotate-12 z-20">
+                    <img src="{% static 'images/reactjs.png' %}" alt="React" class="h-8 lg:h-16">
+                </div>
+
+                <div class="absolute top-24 left-1/4 lg:top-20 lg:left-80 -rotate-12 z-20">
+                    <img src="{% static 'images/js.png' %}" alt="JavaScript" class="h-6 lg:h-16">
+                </div>
+
+                <div class="absolute top-24 lg:top-20 z-20">
+                    <img src="{% static 'images/html.png' %}" alt="HTML" class="h-8 lg:h-16">
+                </div>
+
+                <div class="absolute top-24 right-1/4 lg:top-20 lg:right-80 rotate-12 z-20">
+                    <img src="{% static 'images/css.png' %}" alt="CSS" class="h-8 lg:h-16">
+                </div>
+
+                <div class="absolute top-28 right-2 lg:top-40 lg:right-40 rotate-12 z-20">
+                    <img src="{% static 'images/py.png' %}" alt="Python" class="h-8 lg:h-16">
+                </div>
+
+                <div class="absolute bottom-24 left-16 lg:bottom-20 lg:left-1/3 -rotate-12 z-20">
+                    <img src="{% static 'images/sqlite.png' %}" alt="SQLite" class="h-8 lg:h-16">
+                </div>
+
+                <div class="absolute top-48 left-16 lg:top-64 lg:left-1/3 -rotate-12 z-20">
+                    <img src="{% static 'images/git.png' %}" alt="Git" class="h-8 lg:h-16">
+                </div>
+
+
+                <div class="absolute bottom-24 lg:bottom-20 lg:left-1/2  z-20">
+                    <img src="{% static 'images/mysql.png' %}" alt="MySQL" class="h-8 lg:h-16">
+                </div>
+
+                <div class="absolute bottom-20 right-16 lg:bottom-16 lg:right-1/4 rotate-12 z-20">
+                    <img src="{% static 'images/flask.png' %}" alt="Flask" class="h-8 lg:h-16">
+                </div>
+
+                <div class="absolute bottom-28 left-2  lg:bottom-40 lg:left-40 -rotate-12 z-20">
+                    <img src="{% static 'images/dj.png' %}" alt="Django" class="h-8 lg:h-16">
+                </div>
+
+                <div class="absolute bottom-24 right-2 lg:bottom-40 lg:right-40 rotate-12 z-20">
+                    <img src="{% static 'images/postgresql.png' %}" alt="PostgreSQL" class="h-8 lg:h-16">
+                </div>
+
+                <div class="absolute top-48 right-16 lg:top-64 lg:right-80 rotate-12 z-20">
+                    <img src="{% static 'images/github.png' %}" alt="Github" class="h-7 lg:h-16">
+                </div>
+
+
+
+                
+
+        </div>
+        
+        <div class="flex justify-center pb-20">
+            <div class="flex items-center justify-center w-8 h-8 lg:w-12 lg:h-12 rounded-full bg-black dark:bg-white animate-bounce">
+                <i class="bi bi-arrow-down lg:text-xl text-white dark:text-black"></i>
+            </div>
+        </div>
+    </section>
+    
+
+    {% include 'main/partials/about_section.html' %}
+
+
+{% endblock %}

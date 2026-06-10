@@ -1,0 +1,295 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" class="{{ request.COOKIES.mode }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <script>
+    tailwind.config = {
+        darkMode: 'class'
+    }
+    </script>
+    <title>{% block title %}Saleh Alsuwat{% endblock %}</title>
+</head>
+<body class="bg-white dark:bg-black min-h-screen flex flex-col container mx-auto font-thmanyah">
+
+    <header class="flex p-4 lg:p-8 items-center justify-between fixed top-0 left-0 right-0 lg:left-60 lg:right-60 z-50">
+
+        <!-- logo -->
+        <div class="flex items-center justify-start bg-white dark:bg-black  rounded-full">
+            <span href="/" class="flex items-center gap-1 corsur-pointer">
+                <p class="text-zinc-500 font-bold">{%</p>
+                <p class="text-black dark:text-white text-xl">Saleh</p>
+                <p class="text-zinc-500 font-bold">%}</p>
+            </span>
+        </div>
+
+        <!-- navigation -->
+        <div class="flex items-center justify-center gap-4 lg:gap-6 bg-black dark:bg-zinc-900 py-2 px-4 rounded-full w-auto lg:w-70">
+
+            <!-- menu button -->
+            <div class="relative">
+
+                <button id="menuBtn" class="group flex text-white items-center justify-center gap-3 hover:text-zinc-500 transition">               
+                <div class="flex flex-col gap-1 ">
+                    <span id="line1" class=" w-5 h-px bg-white group-hover:bg-zinc-500 transition-all duration-300 "></span>
+                    <span id="line2" class=" w-5 h-px bg-white group-hover:bg-zinc-500 transition-all duration-300 "></span>
+                </div>
+                    
+                    <span id="menuText" class="inline-block w-20 text-left" >
+                        {% block current_page %}
+                        {% endblock %}
+                    </span>
+                </button>
+
+                <div id="menuPanel" class="hidden duration-300 ease-in absolute -top-5 -left-6 rounded-3xl bg-zinc-300 dark:bg-zinc-950 shadow overflow-hidden -z-50 w-40 lg:min-w-[338px]">
+
+                    <!-- Pages -->
+
+                    <div class="p-4 pt-20 text-black dark:text-white">
+
+                        <p class="text-xs text-zinc-500 pb-2">Pages</p>
+
+                        <div class="space-y-1  text-xl">
+
+                            <a href="/"
+                            class="flex items-center gap-1 ps-3 rounded-xl hover:text-zinc-500 dark:hover:text-zinc-500">
+                                Home
+                            </a>
+
+                            <a href="{% url 'main:about_view' %}"
+                            class="flex items-center gap-1 ps-3 rounded-xl hover:text-zinc-500 dark:hover:text-zinc-500">
+                                About
+                            </a>
+
+                            <a href="{% url 'main:experience_view' %}"
+                            class="flex items-center gap-1 ps-3 rounded-xl hover:text-zinc-500 dark:hover:text-zinc-500">
+                                Experience
+                            </a>
+
+                            <a href="{% url 'main:projects_view' %}"
+                            class="flex items-center gap-1 ps-3 rounded-xl hover:text-zinc-500 dark:hover:text-zinc-500">
+                                Projects
+                            </a>
+
+                            <a href="{% url 'main:skills_view' %}"
+                            class="flex items-center gap-1 ps-3 rounded-xl hover:text-zinc-500 dark:hover:text-zinc-500">
+                                Skills
+                            </a>
+
+                            <a href="{% url 'main:contact_view' %}"
+                            class="flex items-center gap-1 ps-3 rounded-xl hover:text-zinc-500 dark:hover:text-zinc-500">
+                                Contact
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Footer -->
+
+                    <div class="text-black dark:text-white p-4 ">
+
+                        <p class="text-xs text-zinc-500 pb-2">contact</p>
+
+                        <div class="grid grid-row-3 gap-2">
+
+                            <a href="https://github.com/SalehAlsuwat" target="_blank" class=" ps-2 rounded-lg hover:text-zinc-500 dark:hover:text-zinc-500">
+                                GitHub
+                            </a>
+
+                            <a href="www.linkedin.com/in/alsuwatsaleh" target="_blank" class=" ps-2 rounded-lg hover:text-zinc-500 dark:hover:text-zinc-500">
+                                LinkedIn
+                            </a>
+
+                            <a href="mailto:salehalswat2@gmail.com" target="_blank" class=" ps-2 rounded-lg hover:text-zinc-500 dark:hover:text-zinc-500">
+                                Email
+                            </a>
+
+                        </div>
+                        <div class="flex flex-col-2 items-center justify-center pt-4 gap-2">
+                            <a
+                                href="{% url 'main:mode_view' 'toggle' %}?next={{request.path}}"
+                                class="lg:hidden flex w-10 flex items-center justify-center">
+                                {% if request.COOKIES.mode == "dark" %}
+                                    <i class="bi bi-brightness-low-fill text-white text-2xl leading-none"></i>
+                                {% else %}
+                                    <i class="bi bi-moon text-black text-1xl leading-none"></i>
+                                {% endif %}
+                            </a>
+
+                            <button type="button" class="lg:hidden block bg-zinc-800 hover:shadow text-white text-sm py-2 px-5 rounded-full">My CV</button>
+                        </div>
+                        
+
+                    </div>
+
+                </div>
+
+            </div>
+            <script>
+                const menuBtn = document.getElementById('menuBtn');
+                const menuPanel = document.getElementById('menuPanel');
+                const menuText = document.getElementById('menuText');
+                const currentPage = menuText.textContent;
+
+                const line1 = document.getElementById('line1');
+                const line2 = document.getElementById('line2');
+
+                let isOpen = false;
+
+                menuBtn.addEventListener('click', () => {
+                    menuPanel.classList.toggle('hidden');
+
+                    const isOpen = !menuPanel.classList.contains('hidden');
+
+
+                    if (isOpen) {
+
+                        menuText.textContent = 'Close';
+
+                        line1.classList.add('translate-y-[2.5px]', 'rotate-45');
+
+                        line2.classList.add( '-translate-y-[2.5px]', '-rotate-45');
+
+                    } else {
+
+                        menuText.textContent = currentPage;
+
+                        line1.classList.remove('translate-y-[2.5px]', 'rotate-45');
+
+                        line2.classList.remove( '-translate-y-[2.5px]', '-rotate-45' );
+
+                    }
+
+                });
+                
+            </script>
+
+            <!-- mode toggle -->
+            <div class="hidden lg:flex items-center justify-end border border-zinc-300 h-6"></div>
+                <a
+                    href="{% url 'main:mode_view' 'toggle' %}?next={{request.path}}"
+                    class="hidden lg:flex w-10 flex items-center justify-center ">
+                    {% if request.COOKIES.mode == "dark" %}
+                        <i class="bi bi-brightness-low-fill text-white text-2xl leading-none"></i>
+                    {% else %}
+                        <i class="bi bi-moon text-white text-1xl leading-none"></i>
+                    {% endif %}
+                </a>
+                <h1 id="scroll-progress" class="hidden lg:flex items-center justify-center w-16 rounded-full bg-zinc-700 text-xl text-white " >
+                    0%
+                </h1>
+            </div>
+            
+            
+            <!-- scroll progress -->
+            
+
+        </div>
+
+
+        <!-- Resume My -->
+        <div class="hidden lg:block bg-zinc-800 hover:shadow text-white text-sm py-2 px-5 rounded-full">
+            <button type="button" >
+                My CV
+            </button>
+        </div>
+
+    </header>
+
+    <main class="flex-1 flex-col items-center gap-12 p-8 h-full pt-32">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+
+
+    <footer class="relative m-4 h-80 lg:h-[500px] overflow-hidden bg-zinc-800 rounded-3xl " >
+
+        <div class="hidden lg:flex flex-row items-center justify-between p-6 text-zinc-500">
+            <h4>Created by <strong>Saleh Alsuwat</strong>.</h4>
+            <h4>سبحان الله وبحمده - سبحان الله العظيم</h4>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center justify-between p-6 text-zinc-500">
+
+            <div class="hidden lg:flex flex-row pt-6 lg:pt-0 gap-3 justify-center lg:justify-end text-white z-10">
+                <a href="https://github.com/SalehAlsuwat" target="_blank" class="flex items-center gap-1 hover:text-zinc-500 transition-colors">
+                    Github
+                    <i class="bi bi-arrow-up-right text-xs"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/alsuwatsaleh" target="_blank" class="flex items-center gap-1 hover:text-zinc-500 transition-colors ">
+                    LinkedIn
+                    <i class="bi bi-arrow-up-right text-xs"></i>
+                </a>
+                <a href="mailto:salehalswat2@gmail.com" target="_blank" class="flex items-center gap-1 hover:text-zinc-500 transition-colors ">
+                    Email
+                    <i class="bi bi-arrow-up-right text-xs"></i>
+                </a>
+            </div>
+
+            <div class="flex flex-row  lg:pt-0 gap-3 justify-center lg:justify-end text-white font-bold">
+                <a href="{% url 'main:about_view' %}" class="flex items-center gap-1 hover:text-zinc-500 transition-colors ">About</a>
+                <a href="{% url 'main:experience_view' %}" class="flex items-center gap-1 hover:text-zinc-500 transition-colors ">Experience</a>
+                <a href="{% url 'main:projects_view' %}" class="flex items-center gap-1 hover:text-zinc-500 transition-colors ">Projects</a>
+                <a href="{% url 'main:skills_view' %}" class="flex items-center gap-1 hover:text-zinc-500 transition-colors ">Skills</a>
+            </div>
+
+            <div class="lg:hidden flex flex-row pt-6 lg:pt-0 gap-3 justify-center lg:justify-end text-white z-10">
+                <a href="https://github.com/SalehAlsuwat" target="_blank" class="flex items-center gap-1 hover:text-zinc-500 transition-colors ">
+                    Github
+                    <i class="bi bi-arrow-up-right text-xs"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/alsuwatsaleh" target="_blank" class="flex items-center gap-1 hover:text-zinc-500 transition-colors ">
+                    LinkedIn
+                    <i class="bi bi-arrow-up-right text-xs"></i>
+                </a>
+                <a href="mailto:salehalswat2@gmail.com" target="_blank" class="flex items-center gap-1 hover:text-zinc-500 transition-colors ">
+                    Email
+                    <i class="bi bi-arrow-up-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+        
+
+        <div class="lg:hidden flex flex-col items-center justify-between text-[12px] text-zinc-500 ">
+            <h4>Created by <strong>Saleh Alsuwat</strong>.</h4>
+            <h4>سبحان الله وبحمده - سبحان الله اللعظيم</h4>
+        </div>
+        
+        <p class="absolute pointer-events-none left-1/2 bottom-[-30px] lg:bottom-[-105px] -translate-x-1/2 text-[160px] lg:text-[530px] font-bold text-zinc-700 leading-none whitespace-nowrap">         
+            Saleh
+        </p> 
+    </footer>
+
+
+
+    <script>
+        const progress = document.getElementById('scroll-progress');
+
+        window.addEventListener('scroll', () => {
+
+            const scrollTop = window.scrollY;
+
+            const docHeight =
+                document.documentElement.scrollHeight -
+                window.innerHeight;
+
+            const percent = docHeight > 0
+                ? Math.round((scrollTop / docHeight) * 100)
+                : 0;
+
+            progress.textContent = `${percent}%`;
+
+        });
+    </script>
+
+
+</body>
+</html>

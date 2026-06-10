@@ -1,0 +1,190 @@
+{% load static %}
+<section class="pt-2 lg:pt-2 pb-24 dark:text-white">
+
+    <!-- Heading -->
+    <div class="text-center mb-16">
+
+        <p class="uppercase tracking-[0.4em] text-zinc-500 text-sm">
+            About
+        </p>
+
+        <h1 class="text-6xl lg:text-8xl font-bold font-sans mt-4">
+            What Defines Me
+        </h1>
+
+    </div>
+
+    <!-- Content -->
+    <div class="max-w-6xl mx-auto px-8">
+
+        <!-- Name -->
+        <div class="mb-16 text-center">
+
+            <h2 class="text-4xl lg:text-6xl font-bold">
+                Saleh Alsuwat
+            </h2>
+
+            <p class="mt-6 max-w-3xl mx-auto text-zinc-500 text-lg leading-relaxed">
+                Computer Science graduate from 
+                <span class="inline-flex items-baseline items-center justofy-center bg-zinc-200 dark:bg-zinc-800 rounded-full pr-1">
+                <img src="{% static 'images/tf.png' %}" class="mx-1 w-5 self-center rounded-full" />
+                    <span>Taif University</span>
+                </span> 
+                and 
+                <span class="inline-flex items-baseline items-center justofy-center bg-zinc-200 dark:bg-zinc-800 rounded-full pr-1">
+                    <img src="{% static 'images/tuwaiqacademy.png' %}" class="mx-1 w-5 self-center rounded-full" />
+                    <span>Tuwaiq Academy</span>
+                </span> 
+                alumnus, passionate about building intelligent digital products using modern web technologies,
+                artificial intelligence, and user-focused design.
+            </p>
+
+        </div>
+
+        <!-- Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <div class="p-8 rounded-3xl bg-zinc-100 dark:bg-zinc-900 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                <p class="text-zinc-500 mb-3">01</p>
+                <h3 class="text-2xl font-bold">
+                    Full-Stack Development
+                </h3>
+                <p class="mt-3 text-zinc-500">
+                    Building scalable web applications using Django, Flask, React, and SQL databases.
+                </p>
+            </div>
+
+            <div class="p-8 rounded-3xl bg-zinc-100 dark:bg-zinc-900 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                <p class="text-zinc-500 mb-3">02</p>
+                <h3 class="text-2xl font-bold">
+                    Artificial Intelligence
+                </h3>
+                <p class="mt-3 text-zinc-500">
+                    Developing AI-powered systems, recommendation engines, and intelligent solutions.
+                </p>
+            </div>
+
+            <div class="p-8 rounded-3xl bg-zinc-100 dark:bg-zinc-900 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                <p class="text-zinc-500 mb-3">03</p>
+                <h3 class="text-2xl font-bold">
+                    Problem Solving
+                </h3>
+                <p class="mt-3 text-zinc-500">
+                    Transforming ideas into practical products that solve real-world challenges.
+                </p>
+            </div>
+
+            <div class="p-8 rounded-3xl bg-zinc-100 dark:bg-zinc-900 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                <p class="text-zinc-500 mb-3">04</p>
+                <h3 class="text-2xl font-bold">
+                    Continuous Learning
+                </h3>
+                <p class="mt-3 text-zinc-500">
+                    Constantly exploring new technologies, frameworks, and development practices.
+                </p>
+            </div>
+
+            <div class="p-8 rounded-3xl bg-zinc-100 dark:bg-zinc-900 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                <p class="text-zinc-500 mb-3">05</p>
+                <h3 class="text-2xl font-bold">
+                    Data & Analytics
+                </h3>
+                <p class="mt-3 text-zinc-500">
+                    Using data analysis and insights to improve products and user experiences.
+                </p>
+            </div>
+
+            <div class="p-8 rounded-3xl bg-zinc-100 dark:bg-zinc-900 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                <p class="text-zinc-500 mb-3">06</p>
+                <h3 class="text-2xl font-bold">
+                    Product Mindset
+                </h3>
+                <p class="mt-3 text-zinc-500">
+                    Focusing on usability, performance, and long-term value when building products.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="reveal-section" class="relative h-[300vh]">
+
+    <div class="sticky top-0 h-screen flex items-center justify-center">
+
+        <h2 id="revealText"
+            class="max-w-5xl text-center text-2xl lg:text-6xl font-bold leading-tight px-6">
+        </h2>
+
+    </div>
+
+</section>
+
+<script>
+
+const text =
+"With a background in software development and visual design, I strive to create digital products that balance performance, usability, and innovation.";
+
+const container = document.getElementById("revealText");
+const section = document.getElementById("reveal-section");
+
+const words = text.split(" ");
+
+words.forEach(word => {
+
+    const span = document.createElement("span");
+
+    span.textContent = word + " ";
+    
+    span.style.color = "#71717a";
+    span.style.opacity = "0.1";
+    span.style.filter = "blur(4px)";
+    span.style.transition = "all .4s ease";
+    container.appendChild(span);
+
+});
+
+const spans = container.querySelectorAll("span");
+
+window.addEventListener("scroll", () => {
+
+    const rect = section.getBoundingClientRect();
+
+    const progress = Math.min(
+        Math.max(
+            (-rect.top) / (section.offsetHeight - window.innerHeight),
+            0
+        ),
+        1
+    );
+
+    const visibleWords = Math.floor(progress * spans.length);
+
+    spans.forEach((span, index) => {
+
+        if (index <= visibleWords) {
+
+            const isDark =
+            document.documentElement.classList.contains('dark');
+
+            span.style.color =
+            isDark ? "#ffffff" : "#000000";
+
+            span.style.opacity = "1";
+            span.style.removeProperty("filter");
+            span.style.transform = "translateY(0)";
+        } else {
+            span.style.color = "#71717a";
+            span.style.opacity = "0.1";
+            span.style.filter = "blur(4px)";
+            span.style.transform = "translateY(5px)";
+
+        }
+
+    });
+
+});
+
+</script>

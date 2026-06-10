@@ -1,0 +1,11 @@
+@font-face {
+    font-family: "thmanyah";
+    src: url("../fonts/thmanyahsans-Medium.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-thmanyah {
+    font-family: "thmanyah";
+}
+
